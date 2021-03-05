@@ -21,3 +21,6 @@ kubectl apply -f ./manifests/bocanary-deployment.yml
 kubectl apply -f ./manifests/bocanary-service.yml
 kubectl apply -f ./manifests/bocanary-ingress.yml
 kubectl apply -f ./manifests/load-gen.yml
+
+echo "Deploying Canary CRD for bocanry.."
+kubectl apply -f ./manifests/bocanary-canary
