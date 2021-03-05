@@ -10,7 +10,7 @@ echo "Build input $ImageName:$DockerImageTag received"
 sed -i "s|CONTAINER_IMAGE_NAME|$ImageName|" ./CanaryRolloutApp/Helper.cs
 sed -i "s|CONTAINER_IMAGE_VERSION|$ImageTag|" ./CanaryRolloutApp/Helper.cs
 echo "Replaced source code stamp"
-cat ./CanaryRolloutApp/Helper.cs
+
 
 echo "┌┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐"
 echo "┊ Building images ($ImageName:$ImageTag)            │"
