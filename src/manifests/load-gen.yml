@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bocanary-load-generator
+  namespace: bocanary-workload
+spec:
+  selector:
+    matchLabels:
+      app: load
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: load
+    spec:
+      containers:
+      - image: buoyantio/slow_cooker:1.2.0
+        name: slow-cooker
+        env:
+          - name: QPS
+            value: "10"
+          - name: CONCURRENCY
+            value: "1"
+        command: ["/bin/sh", "-c"]
+        args:
+          - |-
+            slow_cooker -qps ${QPS} -concurrency ${CONCURRENCY} http://bocanary:80

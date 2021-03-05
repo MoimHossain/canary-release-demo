@@ -1,10 +1,10 @@
 #!/bin/bash
-ImageName="webapp-netcore5"
-ImageTag="1.0.1"
+ImageName=$1
+ImageTag=$2
 
 
 echo " "
-echo "Build input $ImageName:$DockerImageTag received"
+echo "Build input $ImageName:$ImageTag received"
 
 
 sed -i "s|CONTAINER_IMAGE_NAME|$ImageName|" ./CanaryRolloutApp/Helper.cs
