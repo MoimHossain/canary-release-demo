@@ -6,11 +6,15 @@ ImageTag=$2
 echo " "
 echo "Build input $ImageName:$ImageTag received"
 
+echo "Installing Flagger"
+kubectl apply -k github.com/cloudoven/flagger/kustomize/linkerd
 
 sed -i "s|IMAGE_NAME|$ImageName|" ./manifests/bocanary-deployment.yml
 sed -i "s|IMAGE_VERSION|$ImageTag|" ./manifests/bocanary-deployment.yml
 
 echo "Replaced manifest stamp.. now applying to kubernetes..."
+
+
 
 kubectl apply -f ./manifests/namespace.yml
 kubectl apply -f ./manifests/bocanary-deployment.yml
