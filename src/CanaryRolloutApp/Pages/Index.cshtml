@@ -1,0 +1,29 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+
+    var containerImage = CanaryRolloutApp.ContainerHelper.GetImageName();
+    var imageVersion = CanaryRolloutApp.ContainerHelper.GetImageVersion() ;
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Sample application demonstrating progressive deploments</p>
+
+
+    <p>&nbsp;</p>
+    <h1>Application Metadata</h1>
+    <hr />
+
+    <p>&nbsp;</p>
+
+    <p>Container Image: <strong style="font-size:large;">@containerImage</strong></p>
+    <p>version: <strong style="font-size:x-large;">@imageVersion</strong></p>
+
+    <p>&nbsp;</p>
+
+    <p>Rendered at: <strong style="font-size:x-large;">@DateTime.Now.ToLongTimeString()</strong></p>
+
+</div>
