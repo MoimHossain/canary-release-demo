@@ -15,6 +15,12 @@ Either using ```K9S``` or using the **KubeView**. I am mostlying using KubeView 
 docker run --rm -d -p 8080:8000 -v  C:\Users\mohossa\.kube:/.kube/ ghcr.io/benc-uk/kubeview:0.1.17
 ```
 
+## How to run ```slow-cooker``` locally
+
+```
+ docker run --rm -it buoyantio/slow_cooker:1.2.0 -qps 10 -concurrency 1  http://bocanary.octo-lamp.nl/
+```
+
 ## Understanding the demo
 After lunching the demo the topology would look like below:
 

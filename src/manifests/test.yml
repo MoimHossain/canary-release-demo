@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bocanary
+  namespace: bocanary-workload
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bocanary
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9797"
+      labels:
+        app: bocanary
+    spec:
+      imagePullSecrets:
+      - name: dockerhub      
+      containers:
+      - name: bocanary
+        image: moimhossain/bocanary:v1.0.red
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
