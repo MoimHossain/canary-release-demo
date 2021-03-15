@@ -18,7 +18,7 @@ spec:
       imagePullSecrets:
       - name: dockerhub
       containers:
-      - image: moimhossain/naos-api:IMAGE_VERSION
+      - image: moimhossain/naos-api:v1.0.blue
         imagePullPolicy: Always
         name: naos-api
         ports:
@@ -27,18 +27,3 @@ spec:
           limits:
             cpu: 100m
             memory: 100Mi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: naos-api
-  namespace: naos
-  labels:
-    app.kubernetes.io/name: naos-api
-    app.kubernetes.io/instance: flagger  
-spec:
-  ports:
-  - port: 80
-  selector:
-    app: naos-api
----

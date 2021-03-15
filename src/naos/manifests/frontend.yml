@@ -7,13 +7,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      run: naos-frontend  
+      app: naos-frontend  
   template:
     metadata:
       annotations:
         linkerd.io/inject: enabled
       labels:
-        run: naos-frontend
+        app: naos-frontend
     spec:
       imagePullSecrets:
       - name: dockerhub      
@@ -42,7 +42,7 @@ spec:
   ports:
   - port: 80
   selector:
-    run: naos-frontend
+    app: naos-frontend
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
