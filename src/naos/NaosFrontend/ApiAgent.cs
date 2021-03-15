@@ -8,7 +8,7 @@ namespace NaosFrontend
 {
     public class ApiAgent
     {
-        private static string baseURI = "https://naos-api";
+        private static string baseURI = "http://naos-api";
         private static readonly HttpClient client = new();
 
         public static async Task<string> GetColor()
