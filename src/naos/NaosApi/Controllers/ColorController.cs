@@ -23,7 +23,7 @@ namespace NaosApi.Controllers
         [HttpGet]
         public string Get()
         {
-            return "blue";
+            return "green";
         }
 
         [HttpGet("version")]
