@@ -1,0 +1,12 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Naos App";
+
+    ViewData["VERSION"] = await ApiAgent.GetVersion();
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Version: @ViewData["VERSION"]</p>
+</div>

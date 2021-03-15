@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: naos-frontend
+  namespace: naos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: naos-frontend  
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        run: naos-frontend
+    spec:
+      imagePullSecrets:
+      - name: dockerhub      
+      containers:
+      - env:
+        - name: DOTNET_SYSTEM_NET_HTTP_SOCKETSHTTPHANDLER_HTTP2UNENCRYPTEDSUPPORT
+          value: "true"
+        image: moimhossain/naos-frontend:IMAGE_VERSION
+        imagePullPolicy: Always        
+        name: naos-frontend
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: naos-frontend
+  namespace: naos
+spec:
+  type: ClusterIP 
+  ports:
+  - port: 80
+  selector:
+    run: naos-frontend
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: frontend-ingress
+  namespace: naos
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+  - host: naos.octo-lamp.nl
+    http:
+      paths:
+      - backend:
+          serviceName: naos-frontend
+          servicePort: 80
+        path: /(.*)

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: naos-api
+  namespace: naos
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: naos-api
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        run: naos-api
+    spec:
+      imagePullSecrets:
+      - name: dockerhub
+      containers:
+      - image: moimhossain/naos-api:IMAGE_VERSION
+        imagePullPolicy: Always
+        name: naos-api
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: naos-api
+  namespace: naos
+  labels:
+    app.kubernetes.io/name: naos-api
+    app.kubernetes.io/instance: flagger  
+spec:
+  ports:
+  - port: 80
+  selector:
+    run: naos-api
+---
