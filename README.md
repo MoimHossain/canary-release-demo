@@ -20,6 +20,7 @@ docker run --rm -d -p 8080:8000 -v  C:\Users\mohossa\.kube:/.kube/ ghcr.io/benc-
 ```
  docker run --rm -it buoyantio/slow_cooker:1.2.0 -qps 10 -concurrency 1  http://bocanary.octo-lamp.nl/
 ```
+Make sure the DNS is configured before running this.
 
 ## Understanding the demo
 After lunching the demo the topology would look like below:
