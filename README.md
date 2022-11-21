@@ -40,4 +40,5 @@ At that point we can make a change the asp.net app and redeploy the pipeline - w
 
 After certain time, when linkerd traffic splits detects no failure on canary releases it will swap out the primary with canary and the canary will be removed.
 
+## Conclusion
 That's all.
